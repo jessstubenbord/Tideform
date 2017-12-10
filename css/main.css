@@ -1,0 +1,73 @@
+html{
+	background-color: #180519;
+	height: 100%;
+	width:100%;
+	margin: 0;
+	overflow: auto;
+}
+body{
+	background-color: #180519;
+	height: 100%;
+	width:100%;
+	margin: 0;
+	overflow: auto;
+}
+.text{
+	position: relative;
+	z-index: 2;
+}
+h1{
+    letter-spacing: 7px;
+    font-size: 50px;
+    color: #3a3a3a;
+    font-family: fenwick, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    margin: 20px 20px 5px 20px;
+	//text-shadow: 0px 0px 16px #03e1ff;
+}
+.city {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    padding-left: 25px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #3a3a3a;
+    text-transform: uppercase;
+}
+ul{
+	margin: 0;
+}
+.stats{
+	color: #00E1FF;
+	font-family: monospace;
+	text-shadow: 2px 2px 8px #180519;
+}
+.currentTime{
+	color: #ffb500;
+}
+.st0{
+	transform-origin: center;
+	animation: spin 89416.3s linear infinite;
+
+}
+.formbox{
+	width: 300px;
+	height: 300px;
+	padding: 20px;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	margin: -170px 0 0 -170px;
+}
+
+    @keyframes spin { 
+        from { 
+            transform: rotate(0deg); 
+        } to { 
+            transform: rotate(360deg); 
+        }
+    }

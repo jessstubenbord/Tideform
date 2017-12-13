@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/aja1peq.css");
+
 html{
 	background-color: #180519;
 	height: 100%;
@@ -19,7 +21,7 @@ body{
 h1{
     letter-spacing: 7px;
     font-size: 50px;
-    color: #3a3a3a;
+    color: #505050;
     font-family: fenwick, sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -33,7 +35,7 @@ h1{
     padding-left: 25px;
     font-size: 14px;
     font-weight: 400;
-    color: #3a3a3a;
+    color: #505050;
     text-transform: uppercase;
 }
 ul{

@@ -73,11 +73,15 @@ ul {
 
 /* Individual styles */
 .item--style-1 .item__deco {
-  fill: #dcdcde;
+  fill: #662d91;
 }
 
 .deco1 {
-  fill: #dcdcde;
+  fill: #662d91;
+}
+
+.item__img {
+  fill: red;
 }
 
 /* items */

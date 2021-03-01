@@ -9,7 +9,6 @@ time.innerText = `Current time: ${currentTime}`;
 var city;
 var lat;
 var lng;
-var firstHighTide;
 
 function getCoordinates() {
   const options = {
@@ -74,6 +73,7 @@ getCoordinates();
 var todayData;
 var highTide;
 var lowTide;
+var rotation;
 
 function getTide(lat, lng) {
   fetch(
@@ -94,13 +94,15 @@ function getTide(lat, lng) {
 
       //figure out the NEXT high and low tide based on the current time
       function highTide() {
-        if (todayData[0].time.split(11, 13) > isoTime) {
+        let hightideData = todayData.filter((data) => data.type === 'high');
+
+        if (hightideData[0].time.split(11, 13) > isoTime) {
           highTide = todayData[0].time.slice(11, 16);
           return (document.querySelector(
             `.highTide`
           ).innerText = `Next high tide: ${highTide}`);
         } else {
-          highTide = todayData[2].time.slice(11, 16);
+          highTide = hightideData[1].time.slice(11, 16);
           return (document.querySelector(
             `.highTide`
           ).innerText = `Next high tide: ${highTide}`);
@@ -108,13 +110,15 @@ function getTide(lat, lng) {
       }
 
       function lowTide() {
-        if (todayData[1].time.slice(11, 13) > isoTime) {
+        let lowtideData = todayData.filter((data) => data.type === 'low');
+
+        if (lowtideData[0].time.slice(11, 13) > isoTime) {
           lowTide = todayData[1].time.slice(11, 16);
           return (document.querySelector(
             `.lowTide`
           ).innerText = `Next low tide: ${lowTide}`);
         } else {
-          lowTide = todayData[3].time.slice(11, 16);
+          lowTide = lowtideData[1].time.slice(11, 16);
           return (document.querySelector(
             `.lowTide`
           ).innerText = `Next low tide: ${lowTide}`);
@@ -125,63 +129,56 @@ function getTide(lat, lng) {
       lowTide();
 
       //first high tide for rotation
-      let firstHighTide = todayData[0].time.slice(11, 13);
 
-      console.log(firstHighTide);
-      // const secondHighTide = todayData[2].time.slice(11, 13);
-      var rotation;
+      let firstHighTide = todayData
+        .find((data) => data.type === 'high')
+        .time.slice(11, 13);
 
       switch (firstHighTide) {
-        case 00:
-          rotation = 0;
+        case '00':
+          animation(0);
           break;
-        case 01:
-          rotation = 15;
+        case '01':
+          animation(15);
           break;
-        case 02:
-          rotation = 30;
+        case '02':
+          animation(30);
           break;
-        case 03:
-          rotation = 45;
+        case '03':
+          animation(45);
           break;
-        case 04:
-          rotation = 60;
+        case '04':
+          animation(60);
           break;
-        case 05:
-          rotation = 85;
+        case '05':
+          animation(75);
           break;
-        case 06:
-          rotation = 90;
+        case '06':
+          animation(90);
           break;
-        case 07:
-          rotation = 105;
+        case '07':
+          animation(105);
           break;
-        case 08:
-          rotation = 120;
+        case '08':
+          animation(120);
           break;
-        case 09:
-          rotation = 135;
+        case '09':
+          animation(135);
           break;
-        case 10:
-          rotation = 150;
+        case '10':
+          animation(150);
           break;
-        case 11:
-          rotation = 165;
+        case '11':
+          animation(165);
           break;
-        case 12:
-          rotation = 180;
+        case '12':
+          animation(180);
           break;
-        default:
-          rotation = 0;
       }
-    })
-    .then((rotation) => {
-      animation(rotation);
     });
 }
 
 function animation(rotation) {
-  console.log(rotation);
   anime({
     targets: '.item__clippath',
     d:
@@ -189,5 +186,12 @@ function animation(rotation) {
     duration: 1000,
     rotate: rotation,
     easing: 'linear',
+  });
+  anime({
+    targets: '.item__deco',
+    duration: 2500,
+    rotate: rotation * -1,
+    easing: 'easeOutQuad',
+    scale: 0.5,
   });
 }

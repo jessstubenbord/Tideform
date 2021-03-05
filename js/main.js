@@ -1,3 +1,23 @@
+let loadanimation = anime({
+  targets: '.item__clippath',
+  d:
+    'M 378.1,121.2 C 408.4,150 417.2,197.9 411,245.8 404.8,293.7 383.5,341.7 353.4,370.7 303.2,419.1 198.7,427.7 144.5,383.8 86.18,336.5 67.13,221.3 111.9,161 138.6,125 188.9,99.62 240.7,90.92 292.4,82.24 345.6,90.32 378.1,121.2 Z',
+  duration: 3000,
+  scale: 1.1,
+  loop: true,
+  direction: 'alternate',
+  easing: 'linear',
+});
+
+let loadanimationback = anime({
+  targets: '.item__deco',
+  duration: 3000,
+  scale: 0.95,
+  loop: true,
+  direction: 'alternate',
+  easing: 'linear',
+});
+
 //Current Time
 
 const time = document.querySelector(`.currentTime`);
@@ -57,7 +77,6 @@ function getCity(coordinates) {
     if (xhr.readyState == 4 && xhr.status == 200) {
       var response = JSON.parse(xhr.responseText);
       city = response.address.city;
-      console.log(city);
       const cityLocation = document.querySelector(`.city`);
       cityLocation.innerText = `Location: ${city}`;
       getTide(lat, lng);
@@ -73,7 +92,6 @@ getCoordinates();
 var todayData;
 var highTide;
 var lowTide;
-var rotation;
 
 function getTide(lat, lng) {
   fetch(
@@ -134,56 +152,17 @@ function getTide(lat, lng) {
         .find((data) => data.type === 'high')
         .time.slice(11, 13);
 
-      switch (firstHighTide) {
-        case '00':
-          animation(0);
-          break;
-        case '01':
-          animation(15);
-          break;
-        case '02':
-          animation(30);
-          break;
-        case '03':
-          animation(45);
-          break;
-        case '04':
-          animation(60);
-          break;
-        case '05':
-          animation(75);
-          break;
-        case '06':
-          animation(90);
-          break;
-        case '07':
-          animation(105);
-          break;
-        case '08':
-          animation(120);
-          break;
-        case '09':
-          animation(135);
-          break;
-        case '10':
-          animation(150);
-          break;
-        case '11':
-          animation(165);
-          break;
-        case '12':
-          animation(180);
-          break;
-      }
+      let rotation = firstHighTide * 15;
+      runAnimation(rotation);
     });
 }
 
-function animation(rotation) {
+function runAnimation(rotation) {
   anime({
     targets: '.item__clippath',
     d:
       'M 189,80.37 C 232.6,46.67 352.5,67.06 350.9,124.1 349.5,173.4 311.7,168 312.4,248.1 312.9,301.1 382.5,319.2 368.5,379.1 349.4,460.6 137.7,467.5 117.6,386.3 98.68,309.7 171.5,292.2 183.6,240.1 195.7,188.2 123.8,130.7 189,80.37 Z',
-    duration: 1000,
+    duration: 2500,
     rotate: rotation,
     easing: 'linear',
   });
@@ -191,7 +170,10 @@ function animation(rotation) {
     targets: '.item__deco',
     duration: 2500,
     rotate: rotation * -1,
+    elasticity: 400,
     easing: 'easeOutQuad',
-    scale: 0.5,
+    scale: 0.9,
   });
+  loadanimation.pause();
+  loadanimationback.pause();
 }

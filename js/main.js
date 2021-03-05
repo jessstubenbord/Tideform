@@ -3,7 +3,7 @@ let loadanimation = anime({
   d:
     'M 378.1,121.2 C 408.4,150 417.2,197.9 411,245.8 404.8,293.7 383.5,341.7 353.4,370.7 303.2,419.1 198.7,427.7 144.5,383.8 86.18,336.5 67.13,221.3 111.9,161 138.6,125 188.9,99.62 240.7,90.92 292.4,82.24 345.6,90.32 378.1,121.2 Z',
   duration: 3000,
-  scale: 1.1,
+  scale: 1.05,
   loop: true,
   direction: 'alternate',
   easing: 'linear',
@@ -12,7 +12,7 @@ let loadanimation = anime({
 let loadanimationback = anime({
   targets: '.item__deco',
   duration: 3000,
-  scale: 0.95,
+  scale: 0.85,
   loop: true,
   direction: 'alternate',
   easing: 'linear',
@@ -172,7 +172,7 @@ function runAnimation(rotation) {
     rotate: rotation * -1,
     elasticity: 400,
     easing: 'easeOutQuad',
-    scale: 0.9,
+    scale: 0.85,
   });
   loadanimation.pause();
   loadanimationback.pause();
